@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makšķerēšanas Ieteikumi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+        }
+        header {
+            background-color: #006400;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #006400;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #006400;
+            color: white;
+        }
+        /* Gallery Styling */
+        .gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: 30%;
+            margin-bottom: 15px;
+        }
+        /* Form Styling */
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        form button {
+            background-color: #006400;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Makšķerēšanas Ieteikumi</h1>
+    <nav>
+        <a href="#par">Par Mums</a>
+        <a href="#makskeresana">Makšķerēšanas Ieteikumi</a>
+        <a href="#kontakt">Kontakti</a>
+    </nav>
+</header>
+
+<section id="par">
+    <h2>Par Mums</h2>
+    <p>Laipni lūdzam Makšķerēšanas Ieteikumos! Mūsu mērķis ir dalīties ar vislabākajiem makšķerēšanas padomiem un pieredzi.</p>
+</section>
+<img src="https://www.mk.gov.lv/sites/mk/files/styles/node_image_large/public/gallery_images/c243e6d526dc756f430bc331786b9174.jpg?itok=HwssnFDs" width="700px" alt="Makšķerēšanas attēls">
+
+<section id="makskeresana">
+    <h2>Makšķerēšanas Ieteikumi</h2>
+    <ul>
+        <li>Izvēlies pareizo vietu: Iepazīsti savus ūdeņus.</li>
+        <li>Izmanto piemērotu aprīkojumu: makšķeres, baitus un aksesuārus.</li>
+        <li>Esiet pacietīgs: Makšķerēšana prasa laiku.</li>
+    </ul>
+</section>
+
+<h3>Ieteikumi zemledus makšķerēšanai</h3>
+<ul>
+    <li>Izvēlies pareizo vietu: Meklē dziļākas vietas pie ūdenskrātuvēm, kur zivis var pulcēties.</li>
+    <li>Izmanto piemērotus rīkus: Izvēlies kvalitatīvu zemledus makšķeri.</li>
+    <li>Zivju piebarošana: Pirms makšķerēšanas izsēti piebarojumu.</li>
+    <li>Izmanto pareizās ēsmas: Atkarībā no mērķa zivs izvēlies atbilstošas ēsmas.</li>
+    <li>Uzzini laika apstākļus: Pārbaudi laika prognozes un ledu biezumu.</li>
+</ul>
+
+<!-- Gallery Section -->
+<section id="gallery">
+    <h2>Makšķerēšanas Galerija</h2>
+    <div class="gallery">
+        <img src="https://via.placeholder.com/300x200" alt="Makšķerēšanas attēls 1">
+        <img src="https://via.placeholder.com/300x200" alt="Makšķerēšanas attēls 2">
+        <img src="https://via.placeholder.com/300x200" alt="Makšķerēšanas attēls 3">
+    </div>
+</section>
+
+<section id="kontakt">
+    <h2>Kontakti</h2>
+    <p>Ja vēlies sazināties ar mums, lūdzu, raksti uz: <a href="mailto:info@makskereshana.lv">info@makskereshana.lv</a></p>
+    
+    <!-- Contact Form -->
+    <h3>Nosūti mums savu jautājumu</h3>
+    <form action="mailto:info@makskereshana.lv" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Tavs vārds" required>
+        <input type="email" name="email" placeholder="Tavs e-pasts" required>
+        <textarea name="message" rows="4" placeholder="Tavs ziņojums" required></textarea>
+        <button type="submit">Sūtīt ziņojumu</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 Makšķerēšanas Ieteikumi. Visi tiesības aizsargātas.</p>
+</footer>
+
+</body>
+</html>
+
