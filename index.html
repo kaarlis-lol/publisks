@@ -2,64 +2,27 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8">
-  <title>Puķu Avārijs</title>
+  <title>Zivju Spēle</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background-color: #c0c0c0;
-      font-family: Arial, sans-serif;
-      color: white;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    header {
-      background-color: #3b708f;
-      width: 100%;
-      text-align: center;
-      padding: 20px;
-      font-size: 36px;
-      font-weight: bold;
-      color: white;
-    }
-
-    #main {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      gap: 30px;
-      padding: 20px;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
     }
 
-    #description {
-      background-color: #a0e9ff;
-      color: #003049;
-      border: 3px solid #0077b6;
-      padding: 20px;
-      max-width: 400px;
-      font-size: 17px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    #container {
+      text-align: center;
     }
 
     canvas {
       border: 4px solid #0077b6;
       background: linear-gradient(to bottom, #a0e9ff 0%, #e0f7ff 100%);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       display: none;
-    }
-
-    footer {
-      background-color: #3b708f;
-      width: 100%;
-      text-align: center;
-      padding: 15px;
-      font-size: 20px;
-      font-weight: bold;
-      color: white;
-      position: absolute;
-      bottom: 0;
     }
 
     #startButton {
@@ -72,7 +35,6 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       display: block;
     }
 
@@ -82,21 +44,11 @@
   </style>
 </head>
 <body>
-  <header>Puķu Akvārijs</header>
 
-  <button id="startButton">Sākt spēli</button>
-
-  <div id="main">
+  <div id="container">
+    <button id="startButton">Sākt spēli</button>
     <canvas id="mansZimejums" width="800" height="500"></canvas>
-    <div id="description">
-      <strong>Spēles mērķis:</strong><br>
-      Noķer pēc iespējas vairāk krītošo zivju 30 sekunžu laikā!<br><br>
-      Spied bultiņas pa kreisi un pa labi, lai vadītu savu puķi.<br><br>
-      Ik pēc 5 sekundēm zivis kļūst ātrākas un palielinās to daudzums, kas krīt vienā laikā!
-    </div>
   </div>
-
-  <footer>Kārlis Brikmanis</footer>
 
   <script>
     const canvas = document.getElementById("mansZimejums");
