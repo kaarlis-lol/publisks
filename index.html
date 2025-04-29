@@ -1,88 +1,214 @@
-<html>
-    <head>
-        <title>Zivs Krīt Spēle</title>
-    </head>
-    <body>
-        <canvas id="mansZimejums" width="300" height="300" style="border:1px solid"></canvas>
-        <script>
-            let canvas = document.getElementById("mansZimejums");
-            let ctx = canvas.getContext("2d");
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <title>Puķu Avārijs</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #c0c0c0;
+      font-family: Arial, sans-serif;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-            // Ielādējam attēlus
-            let zivsAttels = new Image();
-            zivsAttels.src = 'zivs.png';  // Šeit jānorāda attēla ceļš zivij
-            let pukeAttels = new Image();
-            pukeAttels.src = 'puke.png';  // Šeit jānorāda attēla ceļš puķei
+    header {
+      background-color: #3b708f;
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+    }
 
-            // Spēlētāja pozīcijas un izmēri
-            let player_x = canvas.width / 2 - 25;
-            let player_y = canvas.height - 50;
-            let playerWidth = 50;
-            let playerHeight = 50;
+    #main {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 20px;
+    }
 
-            // Zivs pozīcijas un parametri
-            let zivs_x = Math.random() * (canvas.width - 20); // Zivs sākuma X pozīcija
-            let zivs_y = 0; // Zivs sākuma Y pozīcija
-            let zivsRadius = 20; // Zivs rādiuss
+    #description {
+      background-color: #a0e9ff;
+      color: #003049;
+      border: 3px solid #0077b6;
+      padding: 20px;
+      max-width: 400px;
+      font-size: 17px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
 
-            let score = 0;
-            let time_remaining = 20; // taimeris
+    canvas {
+      border: 4px solid #0077b6;
+      background: linear-gradient(to bottom, #a0e9ff 0%, #e0f7ff 100%);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      display: none;
+    }
 
-            function MyKeyDownHandler(MyEvent) { 
-                if (MyEvent.keyCode == 37 && player_x > 0) {
-                    player_x -= 10; // Pārvietot pa kreisi
-                }  
-                if (MyEvent.keyCode == 39 && player_x + playerWidth < canvas.width) {
-                    player_x += 10; // Pārvietot pa labi
-                }
-            }
+    footer {
+      background-color: #3b708f;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      position: absolute;
+      bottom: 0;
+    }
 
-            function Do_a_Frame() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+    #startButton {
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: block;
+    }
 
-                ctx.fillStyle = "purple";
-                ctx.font = "20px Arial";
-                ctx.fillText("Score: " + score, 10, 20);
-                ctx.fillText("Time Remaining: " + Math.ceil(time_remaining), 10, 45);
+    #startButton:hover {
+      background-color: #005f8a;
+    }
+  </style>
+</head>
+<body>
+  <header>Puķu Akvārijs</header>
 
-                // Zīmēt puķi (spēlētāju)
-                ctx.drawImage(pukeAttels, player_x, player_y, playerWidth, playerHeight); 
+  <button id="startButton">Sākt spēli</button>
 
-                // Zivs kustība
-                zivs_y += 3; // Zivs krīt
-                ctx.drawImage(zivsAttels, zivs_x - zivsRadius, zivs_y - zivsRadius, zivsRadius * 2, zivsRadius * 2); 
+  <div id="main">
+    <canvas id="mansZimejums" width="800" height="500"></canvas>
+    <div id="description">
+      <strong>Spēles mērķis:</strong><br>
+      Noķer pēc iespējas vairāk krītošo zivju 30 sekunžu laikā!<br><br>
+      Spied bultiņas pa kreisi un pa labi, lai vadītu savu puķi.<br><br>
+      Ik pēc 5 sekundēm zivis kļūst ātrākas un palielinās to daudzums, kas krīt vienā laikā!
+    </div>
+  </div>
 
-                // Pārbaudīt, vai zivs ir nokritusi
-                if (zivs_y > canvas.height) {
-                    zivs_y = 0; // Atjaunot zivi uz augšu
-                    zivs_x = Math.random() * (canvas.width - zivsRadius * 2); // Jauna X pozīcija
-                }
+  <footer>Kārlis Brikmanis</footer>
 
-                // Pārbaudīt, vai spēlētājs ir noķēris zivtiņu
-                if (zivs_y + zivsRadius >= player_y && zivs_x + zivsRadius > player_x && zivs_x - zivsRadius < player_x + playerWidth) {
-                    score += 1; // Palielināt punktus
-                    zivs_y = 0; // Atjaunot zivi uz augšu
-                    zivs_x = Math.random() * (canvas.width - zivsRadius * 2); // Jauna X pozīcija
-                }
-            }
+  <script>
+    const canvas = document.getElementById("mansZimejums");
+    const ctx = canvas.getContext("2d");
+    const startButton = document.getElementById("startButton");
 
-            // Taimeris
-            function updateTimer() {
-                if (time_remaining > 0) {
-                    time_remaining -= 1 / 40; // Samazināt laiku (25 ms = 1/40 sekundes)
-                } else {
-                    clearInterval(gameInterval); // Apturēt spēli, kad laiks beidzas
-                    alert("Spēle beigusies! Jūsu rezultāts: " + score);
-                }
-            }
+    const zivsAttels = new Image();
+    zivsAttels.src = 'zivs.png';
 
-            // Sākt spēles ciklu
-            var gameInterval = setInterval(function() {
-                Do_a_Frame();
-                updateTimer();
-            }, 25);
+    const pukeAttels = new Image();
+    pukeAttels.src = 'puke.png';
 
-            window.addEventListener("keydown", MyKeyDownHandler); 
-        </script>
-    </body>
+    let player_x = canvas.width / 2 - 25;
+    const player_y = canvas.height - 60;
+    const playerWidth = 50;
+    const playerHeight = 50;
+
+    let score = 0;
+    let time_remaining = 30;
+    let last_speed_update = 30;
+
+    let zivsAtrums = 3;
+    let zivsSaraksts = [{ x: getRandomX(), y: 0 }];
+    let gameInterval = null;
+
+    let moveLeft = false;
+    let moveRight = false;
+
+    function getRandomX() {
+      return Math.random() * (canvas.width - 40) + 20;
+    }
+
+    window.addEventListener("keydown", function(e) {
+      if (["ArrowLeft", "ArrowRight"].includes(e.key)) e.preventDefault();
+      if (e.key === "ArrowLeft") moveLeft = true;
+      if (e.key === "ArrowRight") moveRight = true;
+    });
+
+    window.addEventListener("keyup", function(e) {
+      if (e.key === "ArrowLeft") moveLeft = false;
+      if (e.key === "ArrowRight") moveRight = false;
+    });
+
+    function Do_a_Frame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#003049";
+      ctx.font = "22px Arial";
+      ctx.fillText("Noķertās zivis: " + score, 20, 30);
+      ctx.fillText("Laiks: " + Math.ceil(time_remaining), 20, 60);
+
+      if (moveLeft && player_x > 0) player_x -= 6;
+      if (moveRight && player_x + playerWidth < canvas.width) player_x += 6;
+
+      ctx.drawImage(pukeAttels, player_x, player_y, playerWidth, playerHeight);
+
+      for (let zivs of zivsSaraksts) {
+        zivs.y += zivsAtrums;
+        ctx.drawImage(zivsAttels, zivs.x - 20, zivs.y - 20, 40, 40);
+
+        if (
+          zivs.y + 20 >= player_y &&
+          zivs.x + 20 > player_x &&
+          zivs.x - 20 < player_x + playerWidth
+        ) {
+          score++;
+          zivs.y = 0;
+          zivs.x = getRandomX();
+        }
+
+        if (zivs.y > canvas.height) {
+          zivs.y = 0;
+          zivs.x = getRandomX();
+        }
+      }
+    }
+
+    function updateTimer() {
+      if (time_remaining > 0) {
+        time_remaining -= 1 / 40;
+
+        let newSpeedTime = Math.floor(time_remaining / 5);
+        if (newSpeedTime < last_speed_update) {
+          zivsAtrums += 1;
+          zivsSaraksts.push({ x: getRandomX(), y: 0 });
+          last_speed_update = newSpeedTime;
+        }
+      } else {
+        clearInterval(gameInterval);
+        alert("Spēle beigusies! Tavs rezultāts: " + score);
+        startButton.style.display = "block";
+        canvas.style.display = "none";
+      }
+    }
+
+    startButton.addEventListener("click", () => {
+      player_x = canvas.width / 2 - 25;
+      score = 0;
+      time_remaining = 30;
+      zivsAtrums = 3;
+      zivsSaraksts = [{ x: getRandomX(), y: 0 }];
+      last_speed_update = 30;
+
+      canvas.style.display = "block";
+      startButton.style.display = "none";
+
+      clearInterval(gameInterval);
+      gameInterval = setInterval(() => {
+        Do_a_Frame();
+        updateTimer();
+      }, 25);
+    });
+  </script>
+</body>
 </html>
